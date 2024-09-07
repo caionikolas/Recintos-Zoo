@@ -35,3 +35,16 @@ export const animal4 = new Animal('MACACO', 1, ['savana', 'floresta'])
 export const animal5 = new Animal('GAZELA', 2, ['savana'])
 
 export const animal6 = new Animal('HIPOPOTAMO', 4, ['savana', 'rio'])
+
+export const animais = [
+  { ...animal1 },
+  { ...animal2 },
+  { ...animal3 },
+  { ...animal4 },
+  { ...animal5 },
+  { ...animal6 }
+]
+
+console.log('ok')
+
+console.log(animalTamanho('GAZELA', animais))
