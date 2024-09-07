@@ -35,4 +35,12 @@ export const recinto4 = new Recinto(4, ['rio'], 8, [])
 
 export const recinto5 = new Recinto(5, ['savana'], 9, ['LEAO', 1])
 
+export const recintos = [
+  { ...recinto1 },
+  { ...recinto2 },
+  { ...recinto3 },
+  { ...recinto4 },
+  { ...recinto5 }
+]
+
 console.log(recinto5.animaisExistentes.includes('LEAO'))
