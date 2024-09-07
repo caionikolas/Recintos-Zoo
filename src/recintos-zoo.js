@@ -7,7 +7,7 @@ import {
   animal5,
   animal6
 } from './Animal.js'
-import { recintosViaveis } from './recintosViaveis.js'
+import { recintosViaveis } from './recintos-viaveis.js'
 
 class RecintosZoo {
   recintos = [
@@ -57,31 +57,3 @@ class RecintosZoo {
 }
 
 export { RecintosZoo as RecintosZoo }
-
-/*
-for (let j = 0; j < this.recintos.length; j++) {
-          let espacoVazio =
-            this.recintos[j].tamanhoTotal -
-            this.recintos[j].animaisExistentes[1] * tamanho
-
-          if (!espacoVazio) {
-            espacoVazio = this.recintos[j].tamanhoTotal
-          }
-
-          if (
-            espacoVazio >= tamanho * quantidade &&
-            this.recintos[j].bioma.toString() === bioma
-          ) {
-            if (
-              carnivoros.includes(animal, this.animais) &&
-              espacoVazio === this.recintos[j].tamanhoTotal
-            ) {
-              recintos.push(
-                `Recinto ${this.recintos[j].numero} (espaço livre: ${
-                  espacoVazio - tamanho
-                } total: ${this.recintos[j].tamanhoTotal})`
-              )
-            }
-          }
-        }
-*/

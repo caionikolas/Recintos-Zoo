@@ -17,7 +17,7 @@ export function animalTamanho(animal, animais) {
 export function animalBioma(animal, animais) {
   for (let i = 0; i < animais.length; i++) {
     if (animal === animais[i].especie) {
-      return animais[i].bioma.toString()
+      return animais[i].bioma
     }
   }
 }
