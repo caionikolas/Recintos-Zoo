@@ -74,17 +74,3 @@ export function recintosViaveis(animal, quantidade, animais, recintos) {
   }
   return recintostTotal
 }
-
-/* 
-
-          if (animal === 'HIPOPOTAMO') {
-            return 'okay'
-            if (recintos.animaisExistentes.includes(animal)) {
-              recintostTotal.push(
-                `Recinto ${recintos[i].numero} (espaço livre: ${
-                  espacoLivreNoRecinto - tamanho
-                } total: ${recintos[i].tamanhoTotal})`
-              )
-            }
-          }
-*/

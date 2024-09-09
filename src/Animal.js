@@ -24,17 +24,12 @@ export function animalBioma(animal, animais) {
 
 export const carnivoros = ['LEAO', 'LEOPARDO', 'CROCODILO']
 
-export const animal1 = new Animal('LEAO', 3, ['savana'])
-
-export const animal2 = new Animal('LEOPARDO', 2, ['savana'])
-
-export const animal3 = new Animal('CROCODILO', 3, ['rio'])
-
-export const animal4 = new Animal('MACACO', 1, ['savana', 'floresta'])
-
-export const animal5 = new Animal('GAZELA', 2, ['savana'])
-
-export const animal6 = new Animal('HIPOPOTAMO', 4, ['savana', 'rio'])
+const animal1 = new Animal('LEAO', 3, ['savana'])
+const animal2 = new Animal('LEOPARDO', 2, ['savana'])
+const animal3 = new Animal('CROCODILO', 3, ['rio'])
+const animal4 = new Animal('MACACO', 1, ['savana', 'floresta'])
+const animal5 = new Animal('GAZELA', 2, ['savana'])
+const animal6 = new Animal('HIPOPOTAMO', 4, ['savana', 'rio'])
 
 export const animais = [
   { ...animal1 },
@@ -44,7 +39,3 @@ export const animais = [
   { ...animal5 },
   { ...animal6 }
 ]
-
-console.log('ok')
-
-console.log(animalTamanho('GAZELA', animais))
