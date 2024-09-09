@@ -1,8 +1,40 @@
-import { recintos } from './Recinto.js'
-import { animais } from './Animal.js'
+import {
+  recinto1,
+  recinto2,
+  recinto3,
+  recinto4,
+  recinto5,
+  recintos
+} from './Recinto.js'
+import {
+  animais,
+  animal1,
+  animal2,
+  animal3,
+  animal4,
+  animal5,
+  animal6
+} from './Animal.js'
 import { recintosViaveis } from './recintos-viaveis.js'
 
 class RecintosZoo {
+  animais = [
+    { ...animal1 },
+    { ...animal2 },
+    { ...animal3 },
+    { ...animal4 },
+    { ...animal5 },
+    { ...animal6 }
+  ]
+
+  recintos = [
+    { ...recinto1 },
+    { ...recinto2 },
+    { ...recinto3 },
+    { ...recinto4 },
+    { ...recinto5 }
+  ]
+
   analisaRecintos(animal, quantidade) {
     if (quantidade <= 0) {
       return {
@@ -10,13 +42,13 @@ class RecintosZoo {
       }
     }
 
-    for (let i = 0; i < animais.length; i++) {
-      if (animal === animais[i].especie) {
+    for (let i = 0; i < this.animais.length; i++) {
+      if (animal === this.animais[i].especie) {
         const recintosTotal = recintosViaveis(
           animal,
           quantidade,
-          animais,
-          recintos
+          this.animais,
+          this.recintos
         )
 
         if (recintosTotal.length === 0) {

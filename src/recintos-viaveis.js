@@ -7,7 +7,7 @@ export function recintosViaveis(animal, quantidade, animais, recintos) {
   let recintostTotal = []
   for (let i = 0; i < recintos.length; i++) {
     let espacoLivreNoRecinto =
-      recintos[i].tamanhoTotal - recintos[i].animaisExistentes[1] * tamanho
+      recintos[i].tamanhoTotal - recintos[i].animaisExistentes[0] * tamanho
 
     if (!espacoLivreNoRecinto) {
       espacoLivreNoRecinto = recintos[i].tamanhoTotal
@@ -48,16 +48,17 @@ export function recintosViaveis(animal, quantidade, animais, recintos) {
                 recintostTotal.push(
                   `Recinto ${recintos[i].numero} (${espacoLivre} ${espacoTotal})`
                 )
-
-                continue
               }
 
               if (possuiOutrosAnimais) {
-                const temEspaco =
-                  espacoLivreNoRecinto - tamanho * quantidade === 0
-                if (temEspaco) {
-                  recintostTotal.push(2)
-                }
+                recintostTotal.push(
+                  `Recinto ${recintos[i].numero} (espaço livre: ${
+                    espacoLivreNoRecinto -
+                    tamanho * quantidade -
+                    recintos[i].animaisExistentes.length +
+                    1
+                  } ${espacoTotal})`
+                )
               }
             }
           }

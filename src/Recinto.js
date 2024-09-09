@@ -17,23 +17,23 @@ export function verificaCarnivoros(animaisRecinto, carnivoros) {
 }
 
 export function verificaOutros(animaisRecinto, animal) {
-  for (let i = 0; i < animaisRecinto.length; i++) {
-    if (animaisRecinto[i] != animal) {
-      return true
+  for (let i = 0; i < animaisRecinto.animaisExistentes.length; i++) {
+    if (animaisRecinto.animaisExistentes[i] === animal) {
+      return false
     }
   }
-  return false
+  return true
 }
 
-export const recinto1 = new Recinto(1, ['savana'], 10, ['MACACO', 3])
+export const recinto1 = new Recinto(1, ['savana'], 10, [3, 'MACACO'])
 
 export const recinto2 = new Recinto(2, ['floresta'], 5, [])
 
-export const recinto3 = new Recinto(3, ['savana', 'rio'], 7, ['GAZELA', 1])
+export const recinto3 = new Recinto(3, ['savana', 'rio'], 7, [2, 'GAZELA'])
 
 export const recinto4 = new Recinto(4, ['rio'], 8, [])
 
-export const recinto5 = new Recinto(5, ['savana'], 9, ['LEAO', 1])
+export const recinto5 = new Recinto(5, ['savana'], 9, [3, 'LEAO'])
 
 export const recintos = [
   { ...recinto1 },
