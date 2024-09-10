@@ -1,3 +1,5 @@
+import { carnivoros } from './Animal.js'
+
 class Recinto {
   constructor(numero, bioma, tamanhoTotal, animaisExistentes) {
     this.numero = numero

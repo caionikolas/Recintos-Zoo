@@ -2,7 +2,7 @@ import { RecintosZoo } from './recintos-zoo.js'
 
 describe('Recintos do Zoologico', () => {
   test('Deve rejeitar animal inválido', () => {
-    const resultado = new RecintosZoo().analisaRecintos('UNICORNIO', 1)
+    const resultado = new RecintosZoo().analisaRecintos('PANDA', 1)
     expect(resultado.erro).toBe('Animal inválido')
     expect(resultado.recintosViaveis).toBeFalsy()
   })

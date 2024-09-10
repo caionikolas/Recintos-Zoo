@@ -1,76 +1,104 @@
-import { animalBioma, animalTamanho, carnivoros } from './Animal'
-import { verificaCarnivoros, verificaOutros } from './Recinto'
+import { animalBioma, animalTamanho, carnivoros } from './Animal.js'
 
 export function recintosViaveis(animal, quantidade, animais, recintos) {
   const tamanho = animalTamanho(animal, animais)
   const bioma = animalBioma(animal, animais)
   let recintostTotal = []
+
+  //Verifica o espaço livre nos recintos
   for (let i = 0; i < recintos.length; i++) {
     let espacoLivreNoRecinto =
-      recintos[i].tamanhoTotal - recintos[i].animaisExistentes[0] * tamanho
+      recintos[i].tamanhoTotal - recintos[i].animaisExistentes[0]
 
     if (!espacoLivreNoRecinto) {
       espacoLivreNoRecinto = recintos[i].tamanhoTotal
     }
 
-    const espacoLivre = `espaço livre: ${
-      espacoLivreNoRecinto - tamanho * quantidade
-    }`
-    const espacoTotal = `total: ${recintos[i].tamanhoTotal}`
+    //filtra todos os recintos que possuem tamanho que cabe o animal e que seja do mesmo bioma
+    if (espacoLivreNoRecinto >= tamanho * quantidade) {
+      for (let j = 0; j < bioma.length; j++) {
+        if (recintos[i].bioma.includes(bioma[j])) {
+          //
+          // Verifica se o recinto é vazio
+          if (espacoLivreNoRecinto === recintos[i].tamanhoTotal) {
+            if (animal !== 'MACACO') {
+              recintostTotal.push(
+                `Recinto ${recintos[i].numero} (espaço livre: ${
+                  espacoLivreNoRecinto - tamanho * quantidade
+                } total: ${recintos[i].tamanhoTotal})`
+              )
+            }
 
-    for (let j = 0; j < bioma.length; j++) {
-      if (
-        espacoLivreNoRecinto >= tamanho * quantidade &&
-        recintos[i].bioma.includes(bioma[j])
-      ) {
-        if (carnivoros.includes(animal)) {
-          if (
-            espacoLivreNoRecinto === recintos[i].tamanhoTotal ||
-            recintos[i].animaisExistentes[0] === animal
-          ) {
-            recintostTotal.push(
-              `Recinto ${recintos[i].numero} (${espacoLivre} ${espacoTotal})`
-            )
-          }
-        }
-
-        if (animal === 'MACACO') {
-          if (espacoLivreNoRecinto < recintos[i].tamanhoTotal) {
-            const possuiCarnivoros = verificaCarnivoros(
-              recintos[i].animaisExistentes,
-              carnivoros
-            )
-
-            if (!possuiCarnivoros) {
-              const possuiOutrosAnimais = verificaOutros(recintos[i], animal)
-
-              if (!possuiOutrosAnimais) {
-                recintostTotal.push(
-                  `Recinto ${recintos[i].numero} (${espacoLivre} ${espacoTotal})`
-                )
-              }
-
-              if (possuiOutrosAnimais) {
+            if (animal === 'MACACO') {
+              if (quantidade !== 1) {
                 recintostTotal.push(
                   `Recinto ${recintos[i].numero} (espaço livre: ${
-                    espacoLivreNoRecinto -
-                    tamanho * quantidade -
-                    recintos[i].animaisExistentes.length +
-                    1
-                  } ${espacoTotal})`
+                    espacoLivreNoRecinto - tamanho * quantidade
+                  } total: ${recintos[i].tamanhoTotal})`
                 )
               }
             }
           }
-
-          if (espacoLivreNoRecinto === recintos[i].tamanhoTotal) {
-            recintostTotal.push(
-              `Recinto ${recintos[i].numero} (${espacoLivre} ${espacoTotal})`
-            )
+          //Caso não seja,
+          //Verifica se o animal é carnivoro
+          if (carnivoros.includes(animal)) {
+            // Verifica se possui a mesma especie no recinto
+            if (recintos[i].animaisExistentes[1] === animal) {
+              recintostTotal.push(
+                `Recinto ${recintos[i].numero} (espaço livre: ${
+                  espacoLivreNoRecinto - tamanho * quantidade
+                } total: ${recintos[i].tamanhoTotal})`
+              )
+            }
+          }
+          //
+          //Como ele não é carnivoro,
+          if (!carnivoros.includes(animal)) {
+            //Verifica-se se os outros animais do recinto são carnivoros
+            const possui = carnivoros.includes(recintos[i].animaisExistentes[1])
+            if (!possui) {
+              if (animal !== 'HIPOPOTAMO') {
+                if (recintos[i].animaisExistentes[1] === animal) {
+                  recintostTotal.push(
+                    `Recinto ${recintos[i].numero} (espaço livre: ${
+                      espacoLivreNoRecinto - tamanho * quantidade
+                    } total: ${recintos[i].tamanhoTotal})`
+                  )
+                }
+                if (
+                  recintos[i].animaisExistentes[1] !== animal &&
+                  recintos[i].animaisExistentes.length !== 0
+                ) {
+                  recintostTotal.push(
+                    `Recinto ${recintos[i].numero} (espaço livre: ${
+                      espacoLivreNoRecinto - tamanho * quantidade - 1
+                    } total: ${recintos[i].tamanhoTotal})`
+                  )
+                }
+              }
+              //Se o animal é um hipopotamo
+              //Verifica-se se é um recinto com savana e rio
+              if (animal === 'HIPOPOTAMO') {
+                if (
+                  recintos[i].bioma.includes('SAVANA') &&
+                  recintos[i].bioma.includes('RIO')
+                ) {
+                  recintostTotal.push(
+                    `Recinto ${recintos[i].numero} (espaço livre: ${
+                      espacoLivreNoRecinto - tamanho * quantidade - 1
+                    } total: ${recintos[i].tamanhoTotal})`
+                  )
+                }
+              }
+            }
           }
         }
       }
     }
   }
-  return recintostTotal
+  var total = recintostTotal.filter(function (este, i) {
+    return recintostTotal.indexOf(este) === i
+  })
+
+  return total
 }
